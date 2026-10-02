@@ -1,0 +1,68 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clock Container - Perfectly centered */
+.clock-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 2rem;
+}
+
+/* Giant Digital Clock */
+.clock-time {
+  font-size: clamp(4.2rem, 18.5vw, 17.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: #000000;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  white-space: nowrap;
+}
+
+/* Colons inside the clock */
+.clock-colon {
+  display: inline-block;
+  transform: translateY(-0.04em);
+  margin: 0 0.02em;
+}
+
+/* Subtitle Date Display */
+.clock-date {
+  font-size: clamp(1.2rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #000000;
+  margin-top: clamp(1.2rem, 3vw, 2.8rem);
+  white-space: nowrap;
+}
+
+/* Fullscreen adjustments */
+:fullscreen body {
+  background-color: #ffffff;
+}
+
+:fullscreen .clock-container {
+  height: 100vh;
+}
