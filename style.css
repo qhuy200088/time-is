@@ -6,8 +6,8 @@
 }
 
 html, body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   background-color: #ffffff;
@@ -19,42 +19,48 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Clock Container - Tràn toàn màn hình, viền mỏng */
+/* Clock Container - Tối ưu sát viền tuyệt đối cho OBS & Màn hình */
 .clock-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2vh 2.5vw;
+  padding: 0;
+  margin: 0;
 }
 
-/* Đồng hồ số khổng lồ */
+/* Đồng hồ số khổng lồ - loại bỏ khoảng hở trên dưới của font chữ */
 .clock-time {
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 0.85;
   letter-spacing: -0.04em;
   color: #000000;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
   white-space: nowrap;
   display: inline-block;
+  padding: 0;
+  margin: 0;
 }
 
 /* Dấu hai chấm */
 .clock-colon {
   display: inline-block;
   transform: translateY(-0.04em);
-  margin: 0 0.015em;
+  margin: 0 0.012em;
 }
 
 /* Thứ ngày tháng */
 .clock-date {
   font-weight: 600;
+  line-height: 1.1;
   letter-spacing: -0.015em;
   color: #000000;
   white-space: nowrap;
   display: inline-block;
+  padding: 0;
+  margin: 0;
 }

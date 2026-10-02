@@ -1,15 +1,4 @@
-// Time.is Minimalist Clock - Tự động giãn full màn hình với viền mỏng
-const WEEKDAYS = [
-  "Thứ Sáu",
-  "Thứ Bảy",
-  "Chủ Nhật",
-  "Thứ Hai",
-  "Thứ Ba",
-  "Thứ Tư",
-  "Thứ Năm"
-];
-
-// Lấy danh sách thứ chuẩn tiếng Việt theo Date.getDay() (0: Chủ Nhật -> 6: Thứ Bảy)
+// Time.is Minimalist Clock - Tối ưu sát viền tuyệt đối cho OBS & Toàn màn hình
 const VN_WEEKDAYS = [
   "Chủ Nhật",
   "Thứ Hai",
@@ -27,33 +16,38 @@ const clockDateEl = document.getElementById('clockDate');
 let lastSecond = -1;
 let lastDateStr = '';
 
-// Tự động tính toán kích cỡ chữ để tràn ngập màn hình với viền cực mỏng
+// Hỗ trợ nền trong suốt nếu gắn ?transparent=1 vào URL (dành cho OBS)
+if (window.location.search.includes('transparent')) {
+  document.body.style.backgroundColor = 'transparent';
+}
+
+// Tự động tính toán kích cỡ chữ để tràn ngập khung hình với viền sát mép nhất có thể
 function fitClock() {
   if (!clockTimeEl || !clockDateEl) return;
 
-  // Viền mỏng: chiếm 96% chiều rộng và 92% chiều cao màn hình
-  const maxW = window.innerWidth * 0.96;
-  const maxH = window.innerHeight * 0.92;
+  // Chiếm 98% chiều rộng và 96% chiều cao khung hình (viền siêu mỏng)
+  const maxW = window.innerWidth * 0.98;
+  const maxH = window.innerHeight * 0.96;
 
   // Đo đạc kích thước cơ sở ở font-size 100px
   clockTimeEl.style.fontSize = '100px';
   clockDateEl.style.fontSize = '20px';
-  clockDateEl.style.marginTop = '15px';
+  clockDateEl.style.marginTop = '6px';
 
   const timeRect = clockTimeEl.getBoundingClientRect();
   const dateRect = clockDateEl.getBoundingClientRect();
 
   if (timeRect.width === 0) return;
 
-  // Tính tỷ lệ phóng đại theo chiều rộng
+  // Tỷ lệ theo chiều rộng
   const scaleByTimeW = maxW / timeRect.width;
   const scaleByDateW = maxW / (dateRect.width || 1);
-  let scale = Math.min(scaleByTimeW, scaleByDateW * 0.25 * 5);
+  let scale = Math.min(scaleByTimeW, scaleByDateW * 0.28 * 5);
 
-  // Kiểm tra giới hạn chiều cao để không bị tràn màn hình theo chiều dọc
+  // Tỷ lệ theo chiều cao
   const timeH = timeRect.height * scale;
   const dateH = (dateRect.height || 20) * (scale * 0.18);
-  const gapH = scale * 8;
+  const gapH = scale * 5;
   const totalH = timeH + dateH + gapH;
 
   if (totalH > maxH) {
@@ -61,8 +55,8 @@ function fitClock() {
   }
 
   const finalFontSize = Math.floor(100 * scale);
-  const finalDateSize = Math.max(14, Math.floor(finalFontSize * 0.17));
-  const finalMarginTop = Math.max(6, Math.floor(finalFontSize * 0.07));
+  const finalDateSize = Math.max(12, Math.floor(finalFontSize * 0.17));
+  const finalMarginTop = Math.max(3, Math.floor(finalFontSize * 0.05));
 
   clockTimeEl.style.fontSize = `${finalFontSize}px`;
   clockDateEl.style.fontSize = `${finalDateSize}px`;
@@ -80,7 +74,7 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(currentSec).padStart(2, '0');
 
-    // Hiển thị dạng HH:mm:ss
+    // Hiển thị giờ dạng HH:mm:ss
     clockTimeEl.innerHTML = `${hours}<span class="clock-colon">:</span>${minutes}<span class="clock-colon">:</span>${seconds}`;
     document.title = `${hours}:${minutes}:${seconds} - Time.is`;
 
@@ -105,7 +99,7 @@ function updateClock() {
 updateClock();
 fitClock();
 
-// Lắng nghe sự kiện thay đổi kích thước cửa sổ hoặc toàn màn hình
+// Lắng nghe sự kiện thay đổi kích thước
 window.addEventListener('resize', fitClock);
 document.addEventListener('fullscreenchange', () => {
   setTimeout(fitClock, 50);
