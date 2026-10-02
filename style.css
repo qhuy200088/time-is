@@ -6,8 +6,10 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   background-color: #ffffff;
   color: #000000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -17,52 +19,42 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Clock Container - Perfectly centered */
+/* Clock Container - Tràn toàn màn hình, viền mỏng */
 .clock-container {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 1rem 2rem;
+  padding: 2vh 2.5vw;
 }
 
-/* Giant Digital Clock */
+/* Đồng hồ số khổng lồ */
 .clock-time {
-  font-size: clamp(4.2rem, 18.5vw, 17.5rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.035em;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   color: #000000;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
   white-space: nowrap;
+  display: inline-block;
 }
 
-/* Colons inside the clock */
+/* Dấu hai chấm */
 .clock-colon {
   display: inline-block;
   transform: translateY(-0.04em);
-  margin: 0 0.02em;
+  margin: 0 0.015em;
 }
 
-/* Subtitle Date Display */
+/* Thứ ngày tháng */
 .clock-date {
-  font-size: clamp(1.2rem, 3.2vw, 2.6rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #000000;
-  margin-top: clamp(1.2rem, 3vw, 2.8rem);
   white-space: nowrap;
-}
-
-/* Fullscreen adjustments */
-:fullscreen body {
-  background-color: #ffffff;
-}
-
-:fullscreen .clock-container {
-  height: 100vh;
+  display: inline-block;
 }
